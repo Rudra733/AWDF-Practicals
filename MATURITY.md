@@ -116,6 +116,35 @@ Therefore, it does not satisfy Level 3.
 
 ---
 
+## HATEOAS Awareness (Level 3)
+
+To achieve Richardson Maturity Model Level 3, the API responses should include hypermedia links (HATEOAS). These links guide clients to the next available actions without requiring prior knowledge of the API endpoints.
+
+For each task, the following links could be added:
+
+```json
+{
+  "id": 123,
+  "title": "Task A",
+  "completed": false,
+  "_links": {
+    "self": "/tasks/123",
+    "delete": "/tasks/123"
+  }
+}
+```
+
+### Link Descriptions
+
+| Link | Purpose |
+|------|---------|
+| `self` | Retrieves the details of the current task. |
+| `delete` | Deletes the current task from the Task Management API. |
+
+Adding these hypermedia links would make the API Level 3 compliant by allowing clients to discover available actions dynamically through the response.
+
+---
+
 # Conclusion
 
 The Task Management API satisfies **Richardson Maturity Model Level 2** because it uses resource-based URLs, appropriate HTTP methods, and proper HTTP status codes. It does not satisfy Level 3 because it does not implement HATEOAS (Hypermedia as the Engine of Application State).
