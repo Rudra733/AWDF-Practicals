@@ -4,8 +4,8 @@ const app = require("./index");
 describe("Task Management API Automated Tests", () => {
   test("GET / health check returns status 200", async () => {
     const res = await request(app).get("/");
-    // DELIBERATELY BROKEN ASSERTION: Expecting 500 instead of 200 to demonstrate CI pipeline failure
-    expect(res.statusCode).toBe(500);
+    // CORRECTED ASSERTION: Status 200 OK
+    expect(res.statusCode).toBe(200);
     expect(res.text).toBe("Task Management API is running!");
   });
 
