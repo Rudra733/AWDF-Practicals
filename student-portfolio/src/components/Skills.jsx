@@ -1,0 +1,15 @@
+function Skills({ skillList }) {
+  return (
+    <div>
+      <h2>Skills</h2>
+
+      <ul>
+        {skillList.map((skill) => (
+          <li key={skill}>{skill}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default Skills;

@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  # 1. MongoDB Database Service
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app-network
+
+  # 2. Node/Express Backend API Service
+  backend:
+    build:
+      context: ./task-management-api
+      dockerfile: Dockerfile
+    container_name: backend
+    restart: always
+    ports:
+      - "3000:3000"
+      - "5000:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://mongodb:27017/taskdb
+      - JWT_SECRET=super_secret_jwt_key_24it016_auth_2026
+      - JWT_EXPIRES_IN=1h
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+
+  # 3. React Frontend Service
+  frontend:
+    build:
+      context: ./student-portfolio
+      dockerfile: Dockerfile
+    container_name: frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+# Internal Docker Network for inter-service communication
+networks:
+  app-network:
+    driver: bridge
+
+# Persistent Volume for MongoDB data
+volumes:
+  mongo_data:
+
