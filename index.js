@@ -23,6 +23,7 @@ require("./listeners");
 
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
@@ -72,6 +73,9 @@ app.use("/api", authRoutes);
 // Protected Task Routes
 app.use("/tasks", taskRoutes);
 app.use("/api/tasks", taskRoutes);
+
+// AI Routes (Gemini-powered features)
+app.use("/api/ai", aiRoutes);
 
 // Test Global Error Handler
 app.get("/error", (req, res, next) => {
