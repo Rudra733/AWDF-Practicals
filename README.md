@@ -2,7 +2,6 @@
 
 **Author:** Rudra Dodiya  
 **Affiliation:** 3rd Year B.Tech Information Technology, CSPIT, CHARUSAT  
-**Role:** Cyber Security Intern at SproutSong, Gandhinagar  
 
 ---
 
@@ -27,7 +26,7 @@ AWDF/
 
 ---
 
-## 🚀 Key Features Implemented
+## Key Features Implemented
 
 1. **Route-Based Lazy Loading & Code Splitting:**
    - React `lazy()` and `Suspense` with meaningful fallback spinners.
