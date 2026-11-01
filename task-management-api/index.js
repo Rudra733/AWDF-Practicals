@@ -1,14 +1,12 @@
 require("dotenv").config();
 const dns = require("dns");
 
-// Set public DNS servers only when connecting to MongoDB Atlas SRV clusters (avoids breaking Docker internal DNS)
-if (process.env.MONGO_URI && process.env.MONGO_URI.startsWith("mongodb+srv://")) {
-  try {
-    dns.setDefaultResultOrder?.("ipv4first");
-    dns.setServers(["8.8.8.8", "1.1.1.1"]);
-  } catch (e) {
-    console.warn("Could not set custom DNS servers:", e.message);
-  }
+// Configure DNS resolution for MongoDB Atlas SRV clusters
+try {
+  dns.setDefaultResultOrder?.("ipv4first");
+  dns.setServers(["8.8.8.8", "1.1.1.1"]);
+} catch (e) {
+  console.warn("Could not set custom DNS servers:", e.message);
 }
 
 const express = require("express");
@@ -51,7 +49,7 @@ const MONGO_URI =
 if (process.env.NODE_ENV !== "test") {
   mongoose
     .connect(MONGO_URI, {
-      serverSelectionTimeoutMS: 3000,
+      serverSelectionTimeoutMS: 10000,
     })
     .then(() => {
       console.log("Connected to MongoDB Atlas successfully");

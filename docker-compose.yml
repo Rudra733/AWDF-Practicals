@@ -28,6 +28,7 @@ services:
       - MONGO_URI=mongodb://mongodb:27017/taskdb
       - JWT_SECRET=super_secret_jwt_key_24it016_auth_2026
       - JWT_EXPIRES_IN=1h
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-AQ.Ab8RN6IWDeqIm_qRN4VxishzpYnGmHh-KFSgqBJRzuINyejI6A}
     depends_on:
       - mongodb
     networks:
